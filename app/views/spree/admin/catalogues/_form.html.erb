@@ -1,5 +1,5 @@
 <div data-hook="admin_image_form_fields">
-  <div class="four columns alpha">
+  <div class="five columns alpha">
     <div data-hook="file" class="field">
       <%= f.label Spree.t(:filename) %><br>
       <%= f.file_field :attachment %>
@@ -9,9 +9,9 @@
       <%= f.select :viewable_id, @variants, {}, {:class => 'select2 fullwidth'} %>
     </div>
   </div>
-  <div data-hook="alt_text" class="field omega five columns">
-    <%= f.label Spree.t(:alt_text) %><br>
-    <%= f.text_field :alt %>
+  <div data-hook="alt_text" class="field omega four columns">
+    <%= f.label Spree.t(:catalogue_display_name) %><br>
+    <%= f.text_field :display_name %>
   </div>
 </div>
 

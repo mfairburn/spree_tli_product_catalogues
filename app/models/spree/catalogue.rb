@@ -5,6 +5,10 @@ module Spree
 
     attr_accessible :alt, :attachment, :position, :viewable_type, :viewable_id
 
+    alias_attribute :display_name, :alt
+    attr_accessible :display_name
+    validates :display_name, :presence => true
+
     has_attached_file :attachment,
                       styles: { mini: '48x48>', product: '240x240>'},
                       default_style: :product,

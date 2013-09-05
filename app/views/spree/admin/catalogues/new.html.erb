@@ -2,6 +2,8 @@
   <fieldset data-hook="new_catalogue">
     <legend align="center"><%= Spree.t(:new_catalogue) %></legend>
 
+      <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @catalogue } %>
+
       <%= render :partial => 'form', :locals => { :f => f } %>
     
       <div class="form-buttons filter-actions actions" data-hook="buttons">
