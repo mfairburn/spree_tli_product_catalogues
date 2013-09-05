@@ -5,3 +5,11 @@ Deface::Override.new(
   :partial => "spree/admin/shared/catalogues_menu",
   :disabled => false)
 
+Deface::Override.new(
+  :virtual_path  => "spree/products/show",
+  :name          => "insert_catalogues_list",
+  :insert_after  => "[data-hook='description']",
+  :partial       => "spree/products/catalogues",
+  :disabled => false)
+
+

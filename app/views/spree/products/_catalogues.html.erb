@@ -1,0 +1,22 @@
+<%# no need for thumbnails unless there is more than one image %>
+<% if (@product.catalogues + @product.variant_catalogues).uniq.size > 0 %>
+  <div id="product-catalogues">
+    <h6 class="product-section-title">Catalogues</h6>
+    <ul class="product-catalogue-list">
+      <% @product.catalogues.each do |c| %>
+        <li class='cat-all cat-<%= c.viewable.id %>'>
+          <%= link_to(c.alt, c.attachment.url(:original)) %>
+        </li>
+      <% end %>
+
+      <% if @product.has_variants? %>
+        <% @product.variant_catalogues.each do |c| %>
+          <% next if @product.catalogues.include?(c) %>
+          <li class='vcat cat-<%= c.viewable.id %>'>
+            <%= link_to(c.alt, c.attachment.url(:original)) %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
