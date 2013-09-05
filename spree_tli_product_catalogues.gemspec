@@ -2,14 +2,14 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_tli_product_catalogues'
-  s.version     = '2.0.6'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.version     = '2.0.7'
+  s.summary     = 'Add catalogue .pdfs to Spree products'
+  s.description = 'Adds the ability to add and display product catalogue .pdfs to Spree products extending standard Spree asset functionality. Supports variants.'
   s.required_ruby_version = '>= 1.9.3'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
-  # s.homepage  = 'http://www.spreecommerce.com'
+  s.author    = 'Mark Fairburn'
+  s.email     = 'mark@praxitar.com'
+  s.homepage  = 'http://praxitar.com'
 
   #s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
