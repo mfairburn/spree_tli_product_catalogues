@@ -1,0 +1,4 @@
+<%= content_tag :li, :class => ('active' if current == 'Catalogues') do %>
+  <%= link_to_with_icon 'icon-picture', Spree.t(:catalogues), admin_product_catalogues_url(@product) %>
+<% end if can?(:admin, Spree::Image) %>
+

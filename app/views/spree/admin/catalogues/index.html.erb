@@ -1,0 +1,58 @@
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => 'Images'} %>
+
+<% content_for :page_actions do %>
+  <li><%= link_to_with_icon('icon-plus', Spree.t(:new_catalogue), new_admin_product_catalogue_url(@product), :id => 'new_catalogue_link', :class => 'button') %></li>
+<% end %>
+
+<div id="catalogues" data-hook></div>
+
+<% unless @product.catalogues.any? || @product.variant_catalogues.any? %>
+  <div class="no-objects-found">
+    <%= Spree.t(:no_catalogues_found) %>.
+  </div>
+<% else %>
+  <table class="index sortable" data-hook="catalogues_table" data-sortable-link="<%= update_positions_admin_product_catalogues_url(@product) %>">
+    <colgroup>
+      <col style="width: 5%">
+      <col style="width: 10%">
+      <% if @product.has_variants? %>
+        <col style="width: 25%">
+      <% end %>
+      <col style="width: 45%">
+      <col style="width: 15%">
+    </colgroup>
+    <thead>
+      <tr data-hook="catalogues_header">
+        <th colspan="2"><%= Spree.t(:thumbnail) %></th>
+        <% if @product.has_variants? %>
+          <th><%= Spree::Variant.model_name.human %></th>
+        <% end %>
+        <th><%= Spree.t(:alt_text) %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% (@product.variant_catalogues).each do |catalogue| %>
+        <tr id="<%= spree_dom_id catalogue %>" data-hook="catalogues_row" class="<%= cycle('odd', 'even')%>">
+          <td class="no-border">
+            <span class="handle"></span>
+          </td>
+          <td>
+            <%= link_to image_tag(catalogue.attachment.url(:mini)), catalogue.attachment.url(:original) %>
+          </td>
+          <% if @product.has_variants? %>
+            <td><%# = options_text_for(catalogue) %></td>
+          <% end %>
+          <td><%= catalogue.alt %></td>
+          <td class="actions">
+            <%= link_to_with_icon 'icon-edit', Spree.t(:edit), edit_admin_product_catalogue_url(@product, catalogue), :no_text => true, :data => {:action => 'edit'} %>
+            <%= link_to_delete catalogue, { :url => admin_product_catalogue_url(@product, catalogue), :no_text => true } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
