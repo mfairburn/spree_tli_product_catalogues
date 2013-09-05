@@ -16,20 +16,20 @@
   <table class="index sortable" data-hook="catalogues_table" data-sortable-link="<%= update_positions_admin_product_catalogues_url(@product) %>">
     <colgroup>
       <col style="width: 5%">
-      <col style="width: 10%">
+      <col style="width: 25%">
+      <col style="width: 25%">
       <% if @product.has_variants? %>
-        <col style="width: 25%">
+        <col style="width: 20%">
       <% end %>
-      <col style="width: 45%">
       <col style="width: 15%">
     </colgroup>
     <thead>
       <tr data-hook="catalogues_header">
         <th colspan="2"><%= Spree.t(:catalogue_link) %></th>
+        <th><%= Spree.t(:filename) %></th>
         <% if @product.has_variants? %>
           <th><%= Spree::Variant.model_name.human %></th>
         <% end %>
-        <th><%= Spree.t(:catalogue_display_name) %></th>
         <th class="actions"></th>
       </tr>
     </thead>
@@ -41,12 +41,14 @@
             <span class="handle"></span>
           </td>
           <td>
-            <%= link_to image_tag(catalogue.attachment.url(:mini)), catalogue.attachment.url(:original) %>
+            <%= link_to catalogue.display_name, catalogue.attachment.url(:original) %>
+          </td>
+          <td>
+            <%= catalogue.attachment_file_name %>
           </td>
           <% if @product.has_variants? %>
             <td><%= options_text_for(catalogue) %></td>
           <% end %>
-          <td><%= catalogue.display_name %></td>
           <td class="actions">
             <%= link_to_with_icon 'icon-edit', Spree.t(:edit), edit_admin_product_catalogue_url(@product, catalogue), :no_text => true, :data => {:action => 'edit'} %>
             <%= link_to_delete catalogue, { :url => admin_product_catalogue_url(@product, catalogue), :no_text => true } %>
