@@ -18,7 +18,9 @@ module Spree
 
     # save the w,h of the original image (from which others can be calculated)
     # we need to look at the write-queue for images which have not been saved yet
-    after_post_process :find_dimensions
+    # after_post_process :find_dimensions
+
+    before_post_process :is_pdf?
 
     include Spree::Core::S3Support
     supports_s3 :attachment
@@ -41,6 +43,10 @@ module Spree
       geometry = Paperclip::Geometry.from_file(filename)
       self.attachment_width  = geometry.width
       self.attachment_height = geometry.height
+    end
+
+    def is_pdf?
+      self.attachment_content_type == 'application/pdf' ? false : true
     end
 
     # if there are errors from the plugin, then add a more meaningful message
